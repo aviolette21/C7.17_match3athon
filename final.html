@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <style type="text/css">
+        @font-face {
+            font-family: zeldaFont;
+            src: url(Triforce.ttf);
+        }
+        body{
+            margin: 0;
+            padding:0 10%;
+            background-image: url(images/background1.jpg);
+            background-size: cover;
+            background-position: center right;
+        }
+        #gameBoard{
+            width: 43%;
+            height: 72vh;
+            position: relative;
+            margin-left: 9vw;
+            top: 26px;
+            display: inline-block;
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+        .header{
+            margin-left: -1vw;
+            width: 66vw;
+            height: 18vh;
+            #border: solid black;
+            position: relative;
+        }
+        .logo{
+            width: 12vw;
+            text-align: center;
+            margin-top: 1vh;
+            position: absolute;
+            margin-left: 12.5vw;
+        }
+        .title{
+            font-size: 50px;
+            font-family: zeldaFont;
+            text-align: center;
+            margin-top: 9vh;
+            position: absolute;
+            margin-left: 18vw;
+            color: black;
+        }
+        .title1{
+            font-size: 50px;
+            font-family: zeldaFont;
+            text-align: center;
+            margin-top: 9vh;
+            position: absolute;
+            margin-left: 40vw;
+            color: black;
+        }
+        .stats{
+            width: 10vw;
+            display: inline-block;
+            float: left;
+            font-family: zeldaFont;
+            font-size: 20px;
+            color: white;
+            white-space: nowrap;
+        }
+        .rubycount {
+            width: 10vw;
+            position: absolute;
+            margin-left: -4.5vw;
+            margin-top: -8vh;
+        }
+        .soundButton{
+            width: 5vw;
+            position: absolute;
+            margin-left: 33vw;
+        }
+        .mute{
+            width: 3vw;
+            height: 7vh;
+            position: absolute;
+            display: inline;
+            bottom: 30px;
+            margin-left: 12.2vw;
+        }
+        .unmute{
+            width: 3vw;
+            height: 7vh;
+            position: absolute;
+            display: inline;
+            bottom: 30px;
+            margin-left: 12.2vw;
+        }
+        .rules{
+            width: 30vw;
+            height: 55vh;
+            position: absolute;
+            margin-left: 55vw;
+            margin-top: 10vh;
+            font-family: 'zeldaFont';
+            font-size: 25px;
+            color: white;
+
+        }
+        .shield{
+            width: 8vw;
+            position: absolute;
+            margin-left: -4vw;
+            margin-top: -3vh;
+        }
+        .zelda{
+            width: 15vw;
+            height: 30vh;
+            position: absolute;
+            display: inline;
+            bottom: 12px;
+            left: 65px;
+        }
+        .hearts{
+            width: 5vw;
+            position: absolute;
+            display: inline;
+            margin-top: 21vh;
+            left: 2vw;
+        }
+        .hearts1{
+            width: 5vw;
+            position: absolute;
+            display: inline;
+            margin-top: 21vh;
+            left: 7vw;
+        }
+        .bomb{
+            width: 5vw;
+            height: 12vh;
+            position: absolute;
+            display: inline;
+            bottom: 12px;
+            left: 65px;
+            margin-left: 33vw;
+        }
+        .chicken{
+            width: 10vw;
+            position: absolute;
+            display: inline;
+            bottom: 12px;
+            margin-left: 23vw;
+        }
+        .fairy{
+            width: 11vw;
+            height: 22vh;
+            position: absolute;
+            display: inline;
+            bottom: 12px;
+            left: 65px;
+            margin-left: 33vw;
+            margin-bottom: 32vh;
+        }
+        .gameItem{
+            margin-left: 17px;
+            width:8.5%;
+            height: 7.6vh;
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            margin-bottom: 4px;
+            box-sizing: border-box;
+            #border: 1px solid black;
+            background-position: center;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+        .gameItem:hover{
+            opacity: 0.7;
+        }
+        .selectables{
+            -moz-box-shadow: inset 0 0 10px #000000;
+            -webkit-box-shadow: inset 0 0 10px #000000;
+            box-shadow: inset 0 0 20px #000000;
+        }
+        #player {
+        height: 0;
+        width: 0
+        }
+</style>
+</head>
+<body>
+
+
+<header class="header">
+    <div class="logo">
+        <img class="logo" src="images/logo.png">
+    </div>
+    <div class="title">
+        $RUPEE 
+    </div>
+    <div class="title1">
+        CRUSH$
+    </div>
+</header>
+<div class="startcover">
+    <div class="start"></div>
+</div>
+<!-- ///////////////////////////////////////////////////////////////////////////// -->
+<div class="zelda">
+    <img class="zelda" src="images/zelda.gif">
+</div>
+
+<div class="bomb">
+    <img class="bomb" src="images/bomb.png">
+</div>
+<div class="chicken">
+    <img class="chicken" src="images/chicken.gif">
+</div>
+<div class="fairy">
+    <img class="fairy" src="images/fairy.gif">
+</div>
+<div class="hearts">
+    <img class="hearts" src="images/hearts.gif">
+    <img class="hearts1" src="images/hearts.gif">
+    <!-- <img class="magic" src="images/magicmeter.png"> -->
+</div>
+<!-- ///////////////////////////////////////////////////////////////////////////// -->
+<section class="stats">
+    <div class="stats">SCORE: <span class="score">0</span></div>
+</section>
+
+<!-- <div class="rubycount">
+        <img class="rubycount" src="images/rubycount.gif">
+</div> -->
+<div class="shield">
+        <img class="rubycount" src="images/rubycount.gif">
+    </div>
+
+<div class="rules">
+    RULES: %
+    <br>
+    <br>
+    move the rupee's left/right/up/down to try and match the colors in a row. your score is based on how many matches you can get in 60 seconds!
+</div>
+
+ <div class="soundButton">
+   <div class="mute">
+        <img class="mute" src="images/mute.png">
+    </div>
+    <div class="unmute">
+        <!-- <img class="unmute" src="images/unmute.png"> -->
+    </div>
+ </div>
+
+<script type="text/javascript">
+
+var audio = new Audio(),
+    i = 0;
+var playlist = new Array('lostwoodsmp3.mp3', 'kokiriForest.mp3', 'shop.mp3', 'field.mp3', 'battle.mp3', 'market.mp3', 'goron.mp3', 'fairymountain.mp3', 'middleboss.mp3', 'zeldatheme.mp3');
+$('.soundButton').click(function(){
+    console.log('Audio:', audio.paused);
+    if(audio.paused){
+        audio.play();
+        return;
+    }
+    audio.pause();
+});
+// $('.soundButton').click(function(){
+//  audio.play();
+// });
+    
+audio.addEventListener('ended', function () {
+    i = ++i < playlist.length ? i : 0;
+    console.log(i)
+    audio.src = playlist[i];
+    audio.play();
+}, true);
+audio.volume = 0.3;
+audio.loop = false;
+audio.src = playlist[0];
+audio.play();
+
+
+    // $( document ).ready(function() {});
+
+    var x1;
+    var y1;
+    var x2;
+    var y2;
+    var firstClick = null;
+    var secondClick = null;
+    var down = null;
+    var up = null;
+    var left = null;
+    var right = null;
+    var matches=null;
+    var gemType=null;
+    var current;
+    var score = 0;
+
+    var colorArray = ['blue.png', 'green.png', 'white.png', 'pink.png', 'red.png', 'yellow.png'];
+    var numbergrid = [[1,2,3,4,5,6,7,8],
+        [1,2,3,4,5,6,7,8],
+        [1,2,3,4,5,6,7,8],
+        [1,2,3,4,5,6,7,8],
+        [1,2,3,4,5,6,7,8],
+        [1,2,3,4,5,6,7,8],
+        [1,2,3,4,5,6,7,8],
+        [1,2,3,4,5,6,7,8]];
+    var colorgrid = [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ];
+    createColorArray();
+    function createColorArray(){
+        $('body').append("<div id='gameBoard'></div>");
+        console.log('LOADED')
+        for(var i=0; i<numbergrid.length; i++){
+            for(var j=0; j<numbergrid[i].length; j++){
+                var randomColor = colorArray[Math.floor(Math.random()*colorArray.length)];
+                colorgrid[i].push(randomColor);
+                // console.log(randomColor, " pushed")
+            }
+        }
+        createGrid();
+    }
+    function createGrid(){
+        for(var i=0; i<colorgrid.length; i++){
+            for(var j=0; j< colorgrid[i].length; j++){
+                $('#gameBoard').append("<div class='gameItem' y="+ i +" x="+ j +" style='background-image:url(images/"+colorgrid[i][j]+")'></div>");
+            }
+        }
+        console.log('body created');
+        applyHandlers()
+    }
+
+
+    //Click Handler
+    function applyHandlers(){
+        $('.gameItem').on('click', function(){
+            if (firstClick === null){
+                firstClickAssign(this);
+            } else if($(this).hasClass('selectables')){
+                secondClickAssign(this);
+                switchClicks();
+            } else {
+                firstClick = null;
+                toggleSelectables();
+                firstClickAssign(this);
+            }
+
+        });
+    }
+    //Grid Navigating
+    function firstClickAssign(click){
+        // console.log(click);
+        x1 = parseInt($(click).attr('x'));
+        y1 = parseInt($(click).attr('y'));
+        firstClick = colorgrid[y1][x1];
+
+        up = ".gameItem[x='" + x1+ "'][y='" + (y1-1) + "']";
+        down = '.gameItem[x="' + x1 + '"][y="' + (y1+1) + '"]';
+        left = '.gameItem[x="' + (x1-1) + '"][y="' + y1 + '"]';
+        right = '.gameItem[x="' + (x1+1) + '"][y="' + y1 + '"]';
+
+        toggleSelectables()
+    };
+    //Toggle Selection
+    function toggleSelectables(){
+        $(down).toggleClass('selectables');
+        $(up).toggleClass('selectables');
+        $(left).toggleClass('selectables');
+        $(right).toggleClass('selectables');
+    }
+    function secondClickAssign(click){
+        // console.log(click);
+        x2 = parseInt($(click).attr('x'));
+        y2 = parseInt($(click).attr('y'));
+        secondClick = colorgrid[y2][x2];
+    }
+    function switchClicks(){
+        colorgrid[y1][x1] = secondClick;
+        colorgrid[y2][x2] = firstClick;
+        $('#gameBoard').html('');
+        compareSelection();
+        createGrid();
+        resetValues();
+    }
+    function compareSelection() {
+
+
+
+        for (j = 0; j < colorgrid.length; j++) {
+            matches = 0;
+            gemType;
+            for (i = 0; i < colorgrid[0].length; i++) {
+                if (colorgrid[j][i] == gemType) {         //j=y i=x
+                    matches++;
+                }
+                if (colorgrid[j][i] != gemType || j == colorgrid[0].length) {
+                    if (matches >= 3) {
+                        var x = i;
+
+                        for(h=0; h<matches; h++){
+                            current = ".gameItem[y='" + j + "'][x='" + x--+ "']";
+                            var randomColor = colorArray[Math.floor(Math.random()*colorArray.length)];
+                            colorgrid[j].splice(x,1);
+                            colorgrid[j].push(randomColor);
+                            // console.log(current);
+                            score++
+                        }
+                    }
+                    gemType = colorgrid[j][i];
+                    matches = 1;
+                }
+            }
+        }
+        for (j = 0; j < colorgrid.length; j++) {
+            matches = 0;
+            gemType;
+            for (i = 0; i < colorgrid[0].length; i++) {    //i=y j=x
+                if (colorgrid[i][j] == gemType) {
+                    matches++;
+                }
+                if (colorgrid[i][j] != gemType || j == colorgrid[0].length) {
+                    if (matches >= 3) {
+                        var y = i;
+                        for(h=0; h<matches; h++){
+                        	current = ".gameItem[y='" + y-- + "'][x='" + j + "']";
+                        	var randomColor = colorArray[Math.floor(Math.random()*colorArray.length)];
+                        	colorgrid[y].splice(j,1);
+                        	colorgrid[y].push(randomColor);
+                            score++
+                        }
+                    }
+                    gemType = colorgrid[i][j];
+                    matches = 1;
+                }
+            }
+        }
+        $('.score').text(score);
+    }
+
+
+
+
+
+
+
+
+
+    function resetValues(){
+        firstClick = null;
+        secondClick = null;
+        x1 = null;
+        y1 = null;
+        x2 = null;
+        y2 = null;
+    }
+
+
+</script>
+</body>
+</html>
